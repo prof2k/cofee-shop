@@ -73,7 +73,7 @@ The `--reload` flag will detect file changes and restart the server automaticall
     - Register 2 users - assign the Barista role to one and Manager role to the other.
     - Sign into each account and make note of the JWT.
     - Import the postman collection `./starter_code/backend/udacity-fsnd-udaspicelatte.postman_collection.json`
-    - Right-clicking the collection folder for barista and manager, navigate to the authorization tab, and including the JWT in the token field (you should have noted these JWTs).
+    - Right-clicking the collection folder for barista and manager, navigate to the authorization tab, and including the JWT in the token field (you should have noted these JWTs). 
     - Run the collection and correct any errors.
     - Export the collection overwriting the one we've included so that we have your proper JWTs during review!
 
@@ -83,3 +83,11 @@ There are `@TODO` comments throughout the `./backend/src`. We recommend tackling
 
 1. `./src/auth/auth.py`
 2. `./src/api.py`
+
+https://elijahdev.us.auth0.com/authorize?audience=drinks&response_type=token&client_id=4RZ9L193mADjKzXicZBMfIYnopC9KoQm&redirect_uri=http://127.0.0.1:8100/cofee-shop
+
+barister@cofee-cafe.com - 
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlR6VjNiNG1jcFZXODJfWDhvbkhOWSJ9.eyJpc3MiOiJodHRwczovL2VsaWphaGRldi51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWYxNDc2NDU3ZmY2MGQwMDE5ZDY2ODBhIiwiYXVkIjoiZHJpbmtzIiwiaWF0IjoxNTk1MTc5MTQzLCJleHAiOjE1OTUyNjU1NDMsImF6cCI6IjRSWjlMMTkzbUFEakt6WGljWkJNZklZbm9wQzlLb1FtIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJnZXQ6ZHJpbmtzLWRldGFpbCJdfQ.tMO1TxxuaZr2ZNz5G1fr5UULCjsIEvvSgvh2zY-Gnlf5HuzImfqNxVRNaVTCKU_2rBE_HERw1MuZYGTOKtuOY0rQZgjoXjlgcu5rqoFDlrV6WCxCRNDn5SfyFgsgIMyTu97xQyD-194L8wc-Guzi0r-ofE9HUDCnoAyRT9_HfjRatsOP8RO-04Gh0JY-sdYGAe1iYREtPXHAw-myDeaE08DZLL49QzaWcnvIumFjXPVPCNT5Ikc1RsbKyQLMCEqaZCK0tsp-YEI8g4_noKCwwUqqL4tv9mIcE959KBxoRzuvfSrHRVrqJco_ka6hW7Qn9xIbKQYYBCuBCNA0RvRysw
+
+manager@cofee-cafe.com
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlR6VjNiNG1jcFZXODJfWDhvbkhOWSJ9.eyJpc3MiOiJodHRwczovL2VsaWphaGRldi51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWYxNDc5MWUyYWQzMmMwMDEzNGZmOTA2IiwiYXVkIjoiZHJpbmtzIiwiaWF0IjoxNTk1MTc4OTE4LCJleHAiOjE1OTUyNjUzMTgsImF6cCI6IjRSWjlMMTkzbUFEakt6WGljWkJNZklZbm9wQzlLb1FtIiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6ZHJpbmtzIiwiZ2V0OmRyaW5rcy1kZXRhaWwiLCJwYXRjaDpkcmlua3MiLCJwb3N0OmRyaW5rcyJdfQ.SqkMhkFXyOQD-6rYWAafnFgEBtdyg_oNPQ10SdpMAB1S6OA1qzsnk-7lcBeQuWM7cHlSw4BzWS0QivVpw8o_GsZycmK8Y5jR3vmT_wch7PLQZHdr8VYRa7Nk8hsU-bBpEDajuNPXXve6R95wISU5VMhegCzps9lRe52OqCFz-GXcUtcFNGmrLOvKpP8cLbJwDkyTvCnFaLs9OdHN0O59Gki-HFytZLQmtaw-JP9v92j50jWsw6zEN9lWlzOb_0zkQ3k0aSngsS881CDa39cp28i_DEdemYI3-9rtFCpK0FQcwVVPgb5DBz5QTuCbbYPfvcV7Kc_ZUKMXTke8p-FixA
