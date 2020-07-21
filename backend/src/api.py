@@ -59,7 +59,7 @@ def get_drinks_details():
 
     return jsonify({
         'success': 200,
-        'drinks': all_drinks_short
+        'drinks': all_drinks_long
         }), 200
 
 
@@ -90,11 +90,8 @@ def post_new_drink():
         abort(400)
     return jsonify({
         'success': True,
-        'drinks': drink.long()
+        'drinks': new_drink.long()
         }), 200
-
-
-
 
 
 '''
@@ -145,9 +142,9 @@ def modify_drink():
     returns status code 200 and json {"success": True, "delete": id} where id is the id of the deleted record
         or appropriate status code indicating reason for failure
 '''
-@app.route('/drinks/<int: id>', methods=['DELETE'])
+@app.route('/drinks/<int:id>', methods=['DELETE'])
 @requires_auth('delete:drinks')
-def modify_drink(id):
+def delete_drink(id):
     try:
         drink = Drink.query.filter(Drink.id == id).one_or_none()
 
@@ -197,7 +194,7 @@ def unprocessable(error):
 def not_found(error):
     return jsonify({
                     "success": False, 
-                    "error": 404
+                    "error": 404,
                     "message": "resouce not found"
                     }), 404
 
