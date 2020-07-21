@@ -29,11 +29,14 @@ CORS(app)
 '''
 @app.route('/drinks')
 def get_drinks():
-    all_drinks = Drink.query.all()
+    try:
+      all_drinks = Drink.query.all()
 
-    # To get a list of the short formated representation of each drink
-    all_drinks_short = [drink.short() for drink in all_drinks]
-
+      # To get a list of the short formated representation of each drink
+      all_drinks_short = [drink.short() for drink in all_drinks]
+    except Exception as e:
+      print(e)
+      abort(500)
     return jsonify({
         'success': 200,
         'drinks': all_drinks_short
@@ -75,7 +78,7 @@ def get_drinks_details():
 '''
 @app.route('/drinks', methods=['POST'])
 @requires_auth('post:drinks')
-def post_new_drink():
+def create_new_drink():
     data = request.get_json()
 
     drink_title = data.get('title', None)
@@ -84,7 +87,7 @@ def post_new_drink():
     if drink_title and drink_recipe:
         new_drink = Drink(
             title = drink_title,
-            recipe = drink_recipe
+            recipe = json.dumps(drink_recipe)
         )
         new_drink.insert()
     else:
@@ -128,7 +131,7 @@ def modify_drink(id):
         drink.update()
     return jsonify({
         "success": True,
-        "drinks": drink.long()
+        "drinks": [drink.long()]
         }), 200
 
 
@@ -152,6 +155,7 @@ def delete_drink(id):
         # If the drink doesn't exits
         if not drink:
             abort(404)
+
         # If drink of unique id was found
         else:
             drink.delete()
@@ -160,7 +164,7 @@ def delete_drink(id):
             "delete": drink.id
             }), 200
     except:
-        abort(400)
+        abort(404)
 
 
 ## Error Handling
