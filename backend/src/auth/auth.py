@@ -1,5 +1,5 @@
 import json
-from flask import request, _request_ctx_stack
+from flask import request, _request_ctx_stack, abort
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
@@ -18,10 +18,9 @@ class AuthError(Exception):
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
-
-
+    
+    
 ## Auth Header
-
 '''
 @TODO implement get_token_auth_header() method
     it should attempt to get the header from the request
@@ -74,10 +73,16 @@ def get_token_auth_header():
 '''
 def check_permissions(permission, payload):
     if 'permissions' not in payload:
-        abort(400)
+        raise AuthError({
+            'code': 'invalid_jwt',
+            'description': 'permission not in payload'
+        }, 400)
 
     if permission not in payload['permissions']:
-        abort(403)
+        raise AuthError({
+            'code': 'Forbidden',
+            'description': 'Not permitted action for this client'
+        }, 401)
 
     return True
 
@@ -162,9 +167,12 @@ def requires_auth(permission=''):
         @wraps(f)
         def wrapper(*args, **kwargs):
             token = get_token_auth_header()
-            payload = verify_decode_jwt(token)
-            check_permissions(permission, payload)
-            return f(payload, *args, **kwargs)
+            try:
+              payload = verify_decode_jwt(token)
+              check_permissions(permission, payload)
+            except:
+              abort(401)
+            return f(*args, **kwargs)
 
         return wrapper
     return requires_auth_decorator

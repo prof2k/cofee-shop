@@ -52,6 +52,7 @@ def get_drinks():
 @app.route('/drinks-detail')
 @requires_auth('get:drinks-detail')
 def get_drinks_details():
+    print('hello world')
     all_drinks = Drink.query.all()
 
     # To get a list of the long formated representation of each drink
@@ -72,7 +73,7 @@ def get_drinks_details():
     returns status code 200 and json {"success": True, "drinks": drink} where drink an array containing only the newly created drink
         or appropriate status code indicating reason for failure
 '''
-@app.route('/drinks-detail')
+@app.route('/drinks', methods=['POST'])
 @requires_auth('post:drinks')
 def post_new_drink():
     data = request.get_json()
@@ -92,9 +93,10 @@ def post_new_drink():
         'success': True,
         'drinks': new_drink.long()
         }), 200
+    # return "authenticated!!"
 
 
-'''
+''' 
 @TODO implement endpoint
     PATCH /drinks/<id>
         where <id> is the existing model id
@@ -105,18 +107,17 @@ def post_new_drink():
     returns status code 200 and json {"success": True, "drinks": drink} where drink an array containing only the updated drink
         or appropriate status code indicating reason for failure
 '''
-@app.route('/drinks-detail')
+@app.route('/drinks/<int:id>', methods=['PATCH'])
 @requires_auth('patch:drinks')
-def modify_drink():
+def modify_drink(id):
     data = request.get_json()
-    drink_id = int(data.get('id'))
-    drink = Drink.query.filter(Drink.id == drink_id).one_or_none()
+    drink = Drink.query.filter(Drink.id == id).one_or_none()
 
     # If the drink doesn't exits
     if not drink:
         abort(404)
 
-    # If drink of unique id was found
+    # If drink with unique id was found
     else:
         title = data.get('title', None)
         recipe = data.get('recipe', None)
